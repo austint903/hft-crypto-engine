@@ -1,3 +1,0 @@
-/Users/austintan/Desktop/hft_crypto_engine/hft_crypto_engine/third_party/CMakeFiles/hft_engine.dir
-/Users/austintan/Desktop/hft_crypto_engine/hft_crypto_engine/third_party/CMakeFiles/edit_cache.dir
-/Users/austintan/Desktop/hft_crypto_engine/hft_crypto_engine/third_party/CMakeFiles/rebuild_cache.dir
