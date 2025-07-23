@@ -29,11 +29,11 @@ class MarketData{
 
     private:
         void doResolve();
-        // void onResolve(beast::error_code ec, tcp::resolver::results_type results);
-        // void onConnect(beast::error_code ec, tcp::endpoint);
-        // void onSslHandShake(beast::error_code ec);
-        // void onWsHandshake(beast::error_code ec);
-        // void onRead(beast::error_code ec, std::size_t bytes_transferred);
+        void onResolve(beast::error_code ec, tcp::resolver::results_type results);
+        void onConnect(beast::error_code ec, tcp::endpoint);
+        void onSslHandShake(beast::error_code ec);
+        void onWsHandshake(beast::error_code ec);
+        void onRead(beast::error_code ec, std::size_t bytes_transferred);
         std::string buildTarget() const;
 
         asio::io_context & ioc;
