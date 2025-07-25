@@ -30,17 +30,19 @@ class OrderManager{
         explicit OrderManager(boost::asio::io_context& ioc);
         ~OrderManager();
         //returns client Id
-        std::string sendOrder(OrderSide side, double quantity, double price);
-        void cancelOrder(const std::string& clientId);
+        std::string sendOrder(OrderSide side, double quantity, double price, const std::string& symbol);
+        // void cancelOrder(const std::string& clientId);
 
         //gets the update order object after some status
         void onOrderUpdate(OrderCallback cb);
         
-        
+        void cancelOrder(const std::string& clientId);
+        void handleExchangeAcknowledge(const std::string& clientId, double filledQuantity, double filledPrice, bool success);
 
 
 
-    private:
+    private:    
+        void doSend(const std::string& payload);
         boost::asio::io_context& ioc;
         //help with concurrency (in order)/ thread safety
         boost::asio::strand<boost::asio::io_context::executor_type> strand;
