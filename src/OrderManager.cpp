@@ -12,6 +12,7 @@ std::string OrderManager::sendOrder(OrderSide side, double quantity, double pric
     Order order;
     order.clientId=id;
     order.side=side;
+    order.price=price;
     order.quantity=quantity;
     order.status=OrderStatus::NEW;
 
@@ -89,5 +90,5 @@ void OrderManager::handleExchangeAcknowledge(const std::string& clientId, double
     }
 }   
 void OrderManager::doSend(const std::string& payload){
-    
+
 }
