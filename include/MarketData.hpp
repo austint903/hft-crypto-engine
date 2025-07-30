@@ -12,6 +12,7 @@
 #include <atomic>
 #include <algorithm>
 #include <cctype>
+#include <functional>
 
 
 namespace ssl = boost::asio::ssl;
@@ -27,6 +28,24 @@ class MarketData{
         void run();
         void stop();
 
+        struct Level{
+            double price;
+            double quantity;
+
+        };
+        struct Update{
+            std::string symbol;
+            std::vector<Level> bids;
+            std::vector<Level>asks;
+            
+            double midPrice() const {
+                return (bids[0].price + asks[0].price) * 0.5;
+            }
+        };
+
+        void onUpdate(std::function<void(const Update&)> cb);
+
+        
     private:
         void doResolve();
         void onResolve(beast::error_code ec, tcp::resolver::results_type results);
@@ -46,4 +65,5 @@ class MarketData{
         std::vector<std::string> symbols;
         std::thread thread;
         std::atomic<bool> running{false};
+        std::function<void(const Update&)>  updateCallback;
 };
