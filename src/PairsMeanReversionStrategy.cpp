@@ -27,6 +27,7 @@ void PairsMeanReversionStrategy:: onMarketData (const MarketData::Update& update
                 //calculate z-score
                 double z = (spread - mean)/sigma;
                 //call signal
+                generateSignals(z, lastPriceA, lastPriceB);
 
             }
         }
@@ -37,9 +38,14 @@ void PairsMeanReversionStrategy:: onMarketData (const MarketData::Update& update
 void PairsMeanReversionStrategy::generateSignals(double z, double priceA, double priceB){
     if(z<-entryZ){
         //long spread, buy A, sell B
+        attemptTrade(symbolA, OrderSide::BUY, 1.0, priceA);
+        attemptTrade(symbolB, OrderSide::SELL, beta, priceB);
     }
     else if (z>entryZ){
         //short spread sell A, buy B
+        attemptTrade(symbolA, OrderSide::SELL, 1.0, priceA);
+        attemptTrade(symbolB, OrderSide::BUY, beta, priceB);
+
     }
 }
 
