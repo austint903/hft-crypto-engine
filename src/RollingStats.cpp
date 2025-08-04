@@ -1,6 +1,6 @@
 
 #include <RollingStats.hpp>
-
+//helper to retrieve mean and stddev easily
 RollingStats::RollingStats(size_t window) : window(window), sum(0.0), sumSq(0.0) {
     if (window == 0) {
         throw std::invalid_argument("size has to be greater than 0");
